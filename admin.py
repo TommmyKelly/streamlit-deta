@@ -4,7 +4,7 @@ import bcrypt
 import base64
 import io
 
-def check_user(username) -> bool:
+def check_user(users, username) -> bool:
     """
     Check if user exists in the database
     """
@@ -38,7 +38,7 @@ def admin(users):
         submitted_user = st.button("Add User")
         if submitted_user:
             if name and username and password and admin != 'Select':
-                if not check_user(username):
+                if not check_user(users, username):
                     new_user = users.put({'name': name, 'email': username, 'password': hashed_passwords,'admin': admin})
                     print(new_user)
                     if new_user:
