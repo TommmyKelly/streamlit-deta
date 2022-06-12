@@ -1,4 +1,3 @@
-from turtle import update, width
 import streamlit as st
 from deta import Deta
 import streamlit_authenticator as stauth
@@ -7,10 +6,8 @@ import bcrypt
 import base64
 import io
 from streamlit.components.v1 import html
-import time
+import non_admin
 
-reload = f"<script>window.location.reload()</script>"
-# reload = f"<script>alert(123)</script>"
 
 # Connect to Deta Base with your Project Key
 deta = Deta(st.secrets["deta_key"])
@@ -149,54 +146,54 @@ if authentication_status:
                 
            
                  
-
-    # users only
-    user_menu = ['Select','None', 'View', 'Edit', 'Delete']
-    user_choice = st.sidebar.selectbox('Select an option', user_menu)
-    if user_choice == 'View':
-        st.subheader('View your details')
-        data_df = pd.DataFrame(data)
-        st.table(data_df)
-
+    non_admin.non_admin_view()
+#     # users only
+#     user_menu = ['Select','None', 'View', 'Edit', 'Delete']
+#     user_choice = st.sidebar.selectbox('Select an option', user_menu)
+#     if user_choice == 'View':
+#         st.subheader('View your details')
+#         data_df = pd.DataFrame(data)
+#         st.table(data_df)
     
-# Data to be written to Deta Base
-    # with st.form("form"):
-    #     name = st.text_input("Your name")
-    #     age = st.number_input("Your age")
-    #     submitted = st.form_submit_button("Store in database")
+    
+# # Data to be written to Deta Base
+#     with st.form("form"):
+#         name = st.text_input("Your name")
+#         age = st.number_input("Your age")
+#         submitted = st.form_submit_button("Store in database")
 
 
 
 
-    # # # Create a new database "example-db"
-    # # # If you need a new database, just use another name.
-    # db = deta.Base("example-db")
+#     # # Create a new database "example-db"
+#     # # If you need a new database, just use another name.
+#     db = deta.Base("example-db")
 
-    # # # If the user clicked the submit button,
-    # # # write the data from the form to the database.
-    # # # You can store any data you want here. Just modify that dictionary below (the entries between the {}).
-    # if submitted:
-    #     # db.put({"name": name, "age": age})
-    #     age_test = db.fetch({"age": 8})
-    #     print(age_test.items)
+#     # # If the user clicked the submit button,
+#     # # write the data from the form to the database.
+#     # # You can store any data you want here. Just modify that dictionary below (the entries between the {}).
+#     if submitted:
+#         # db.put({"name": name, "age": age})
+#         age_test = db.fetch({"age": 8})
+#         print(age_test.items)
 
        
-    # "---"
-    # # "Here's everything stored in the database:"
-    # # # This reads all items from the database and displays them to your app.
-    # # # db_content is a list of dictionaries. You can do everything you want with it.
-    # db_content = db.fetch().items
+#     "---"
+#     # "Here's everything stored in the database:"
+#     # # This reads all items from the database and displays them to your app.
+#     # # db_content is a list of dictionaries. You can do everything you want with it.
+#     db_content = db.fetch().items
 
-    # df = pd.DataFrame(db_content)
-    # print(df)
-    # df.to_excel("example.xlsx")
-    # menu_data = df['name'].unique()
-    # option = st.selectbox('Select a name', menu_data)
-    # st.table(df[df['name'] == option])
-    # # st.dataframe(df)
-    # st.table(df)
+#     df = pd.DataFrame(db_content)
+#     print(df)
+#     df.to_excel("example.xlsx")
+#     menu_data = df['name'].unique()
+#     option = st.selectbox('Select a name', menu_data)
+#     st.table(df[df['name'] == option])
+#     # st.dataframe(df)
+#     st.table(df)
     
-    # selected_index = st.multiselect("Select a column", df.columns)
+#     selected_index = st.multiselect("Select a column", df.columns)
 
-    # if selected_index:
-    #     st.write(df[selected_index])
+#     if selected_index:
+#         st.write(df[selected_index])
